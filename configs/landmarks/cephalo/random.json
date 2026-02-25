@@ -1,0 +1,51 @@
+{
+    "environment": {
+        "gpu": 0,
+        "seed": 42,
+        "output_dir": "/nethome/home/user/Experiments/miccai26/downstream_tasks/landmarks"
+    },
+    "model": {
+        "architecture": "smp_unet",
+        "encoder": "resnet101",
+        "encoder_weights": "random",
+        "decoder_channels": [
+            256,
+            128,
+            64,
+            32,
+            16
+        ],
+        "pretrained_path": null
+    },
+    "training": {
+        "apply": true,
+        "resume": false,
+        "learning_rate": 0.0001,
+        "optimizer": "adamw",
+        "weight_decay": 0.0001,
+        "scheduler": null,
+        "loss_function": "nll",
+        "epochs": 200,
+        "early_stopping_patience": 15,
+        "use_tta": false
+    },
+    "task_type": "landmarks",
+    "dataset": {
+        "name": "cephalo",
+        "path": "/nethome/home/user/Datasets/Landmarks_datasets/",
+        "image_size": [
+            256,
+            256
+        ],
+        "image_channels": 1,
+        "sigma": 0,
+        "training_samples": 10
+    },
+    "dataloader": {
+        "batch_size": 8,
+        "grad_accumulation": 1,
+        "num_workers": 4,
+        "pin_memory": true
+    },
+    "mode": "train"
+}

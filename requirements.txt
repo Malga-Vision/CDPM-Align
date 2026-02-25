@@ -1,0 +1,14 @@
+albumentations
+einops
+matplotlib
+numpy
+opencv-python
+pandas
+Pillow
+prettytable
+pydicom
+segmentation-models-pytorch
+torch
+torchvision
+torchmetrics
+tqdm

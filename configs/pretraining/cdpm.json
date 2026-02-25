@@ -1,0 +1,47 @@
+{
+    "mode": "train",
+
+    "dataset_type": "combined",
+    "conditioned": true,
+    "data_dir": "/nethome/home/user/Datasets/Landmarks_datasets",
+    "img_size": 256,
+    "img_channels": 1,
+    "max_samples": null,
+
+    "channel": 128,
+    "channel_mult": [1, 2, 2, 2],
+    "attn_heads": 4,
+    "dim_head": 32,
+    "use_linear_attn": true,
+    "num_res_blocks": 2,
+    "dropout": 0.15,
+
+    "T": 500,
+    "beta_1": 1e-4,
+    "beta_T": 0.028,
+
+    "batch_size": 16,
+    "iterations": 50000,
+    "iters_to_accumulate": 1,
+    "lr": 5e-5,
+    "multiplier": 2.0,
+    "grad_clip": 1.0,
+    "mixed_precision": true,
+    "gradient_checkpointing": true,
+
+    "w": 1.0,
+    "images_to_sample": 64,
+    "nrow": 8,
+    "ddim_steps": 50,
+
+    "device": "cuda:0",
+
+    "save_dir": "/nethome/home/user/Experiments/miccai26/pretraining/cdpm_landmarks/",
+    "freq_save": 5000,
+    "load_weights": null,
+    "sampled_dir": "/nethome/home/user/Experiments/miccai26/pretraining/cdpm_landmarks/samples",
+
+    "resume": false,
+    "resume_checkpoint": null,
+    "validate_at_save": true
+}

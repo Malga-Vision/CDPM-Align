@@ -1,0 +1,44 @@
+{
+    "environment": {
+        "gpu": 0,
+        "seed": 42,
+        "output_dir": "/nethome/home/user/Experiments/miccai26/pretraining/ssl"
+    },
+    "model": {
+        "architecture": "dino",
+        "encoder": "resnet101",
+        "encoder_weights": null,
+        "use_smp_encoder": true,
+        "ssl_params": {
+            "dino":     { "projection_dim": 256, "hidden_dim": 2048, "bottleneck_dim": 256,
+                          "temp_s": 0.1, "temp_t": 0.5, "m": 0.5, "lamda": 0.996, "num_crops": 6 },
+            "simclrv2": { "projection_dim": 128, "temperature": 0.5 },
+            "mocov3":   { "projection_dim": 256, "hidden_dim": 2048, "temperature": 0.5, "m": 0.999 }
+        }
+    },
+    "training": {
+        "resume": false,
+        "learning_rate": 1e-4,
+        "optimizer": "adamw",
+        "weight_decay": 1e-4,
+        "scheduler": null,
+        "loss_function": "ssl_native",
+        "iterations": 50000,
+        "freq_checkpoint": 5000
+    },
+    "task_type": "pretraining",
+    "dataset": {
+        "name": "combined_landmarks",
+        "path": "/nethome/home/user/Datasets/Landmarks_datasets",
+        "image_size": [256, 256],
+        "image_channels": 1,
+        "datasets": ["chest", "hand", "cephalo"]
+    },
+    "dataloader": {
+        "batch_size": 16,
+        "grad_accumulation": 1,
+        "num_workers": 8,
+        "pin_memory": true
+    },
+    "mode": "train"
+}

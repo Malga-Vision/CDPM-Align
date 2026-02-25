@@ -1,0 +1,46 @@
+{
+    "mode": "train",
+    "pretrained_checkpoint": "checkpoints/pretraining/cdpm/combined_45k.pt",
+
+    "data_dir": "/nethome/home/user/Datasets/Landmarks_datasets",
+    "img_size": 256,
+    "img_channels": 1,
+    "num_classes": 3,
+
+    "channel": 128,
+    "channel_mult": [1, 2, 2, 2],
+    "attn_heads": 4,
+    "dim_head": 32,
+    "use_linear_attn": true,
+    "num_res_blocks": 2,
+    "dropout": 0.15,
+
+    "proj_hidden_dim": 512,
+    "proj_out_dim": 256,
+
+    "T": 500,
+    "beta_1": 1e-4,
+    "beta_T": 0.028,
+    "bias_mid_timesteps": true,
+    "mid_timestep_weight": 2.0,
+
+    "lambda_diff": 1.0,
+    "lambda_align": 5.0,
+
+    "batch_size": 4,
+    "iterations": 5000,
+    "lr": 1e-5,
+    "weight_decay": 1e-4,
+    "grad_clip": 1.0,
+    "gradient_checkpointing": true,
+
+    "w": 1.0,
+    "ddim_steps": 50,
+    "images_to_sample": 16,
+
+    "device": "cuda:0",
+    "save_dir": "/nethome/home/user/Experiments/miccai26/pretraining/cdpm_align",
+    "freq_save": 5000,
+
+    "resume": false
+}
