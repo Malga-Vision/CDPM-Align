@@ -6,7 +6,7 @@
     },
     "model": {
         "architecture": "cdpm",
-        "pretrained_path": "checkpoints/pretraining/cdpm/combined_50k.pt"
+        "pretrained_path": null
     },
     "training": {
         "apply": true,
@@ -16,13 +16,13 @@
         "weight_decay": 0.0001,
         "scheduler": null,
         "loss_function": "nll",
-        "epochs": 200,
+        "epochs": 300,
         "early_stopping_patience": 15,
         "use_tta": false
     },
     "task_type": "landmarks",
     "dataset": {
-        "name": "cephalo",
+        "name": "chest",
         "path": "/nethome/home/user/Datasets/Landmarks_datasets/",
         "image_size": [
             256,

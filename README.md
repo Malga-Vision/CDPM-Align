@@ -27,14 +27,13 @@ We compare pretraining strategies for few-shot anatomical landmark detection acr
 | Method | Paper name | Config prefix |
 |---|---|---|
 | CDPM-Align (ours) | CDPM-align (λ=5) | `cdpm_align` |
-| CDPM — combined pretraining | CDPM (combined, λ=0) | `cdpm` |
 | CDPM — NIH pretraining | CDPM (NIH, λ=0) | `cdpm_nih` |
 | DINO SSL | ResNet-101 (DINO) | `ssl_dino` |
 | MoCo v3 SSL | ResNet-101 (MoCo v3) | `ssl_mocov3` |
 | SimCLR v2 SSL | ResNet-101 (SimCLR v2) | `ssl_simclrv2` |
 | ImageNet init | ResNet-101 (ImageNet) | `imagenet` |
 | DDPM DiVia | Di Via et al. | `ddpm_divia` |
-| Random init | CDPM Scratch | `random` |
+| CDPM, random init | CDPM Scratch | `cdpm_scratch` |
 
 ---
 
@@ -98,7 +97,7 @@ python -m pretraining.ddpm_divia.ddpm_main -c configs/pretraining/ddpm_config.js
 
 ## Landmark Detection
 
-All downstream experiments use the NLL loss, AdamW (lr=1e-4), and early stopping (patience=15).
+All downstream experiments use the NLL loss, AdamW (lr=1e-4), an effective batch size of 8, up to 300 epochs, and early stopping (patience=15).
 Default: **10 training samples**. Override with `-n N` (e.g., `-n 25`).
 
 ### Shenzhen (chest)
@@ -115,12 +114,6 @@ python -m landmark_detection.landmarks_main -c configs/landmarks/chest/cdpm_nih.
 
 # CDPM (NIH, λ=0) — 25-shot
 python -m landmark_detection.landmarks_main -c configs/landmarks/chest/cdpm_nih.json -n 25
-
-# CDPM (combined, λ=0) — 10-shot  [ablation: Table 4]
-python -m landmark_detection.landmarks_main -c configs/landmarks/chest/cdpm.json
-
-# CDPM (combined, λ=0) — 25-shot
-python -m landmark_detection.landmarks_main -c configs/landmarks/chest/cdpm.json -n 25
 
 # Di Via et al. (DDPM) — 10-shot
 python -m landmark_detection.landmarks_main -c configs/landmarks/chest/ddpm_divia.json
@@ -152,11 +145,11 @@ python -m landmark_detection.landmarks_main -c configs/landmarks/chest/ssl_simcl
 # ResNet-101 SimCLR v2 — 25-shot
 python -m landmark_detection.landmarks_main -c configs/landmarks/chest/ssl_simclrv2.json -n 25
 
-# Random init — 10-shot
-python -m landmark_detection.landmarks_main -c configs/landmarks/chest/random.json
+# CDPM Scratch (random init) — 10-shot
+python -m landmark_detection.landmarks_main -c configs/landmarks/chest/cdpm_scratch.json
 
-# Random init — 25-shot
-python -m landmark_detection.landmarks_main -c configs/landmarks/chest/random.json -n 25
+# CDPM Scratch (random init) — 25-shot
+python -m landmark_detection.landmarks_main -c configs/landmarks/chest/cdpm_scratch.json -n 25
 ```
 
 ### ISBI2015 (cephalo)
@@ -173,12 +166,6 @@ python -m landmark_detection.landmarks_main -c configs/landmarks/cephalo/cdpm_ni
 
 # CDPM (NIH, λ=0) — 25-shot
 python -m landmark_detection.landmarks_main -c configs/landmarks/cephalo/cdpm_nih.json -n 25
-
-# CDPM (combined, λ=0) — 10-shot
-python -m landmark_detection.landmarks_main -c configs/landmarks/cephalo/cdpm.json
-
-# CDPM (combined, λ=0) — 25-shot
-python -m landmark_detection.landmarks_main -c configs/landmarks/cephalo/cdpm.json -n 25
 
 # Di Via et al. (DDPM) — 10-shot
 python -m landmark_detection.landmarks_main -c configs/landmarks/cephalo/ddpm_divia.json
@@ -210,11 +197,11 @@ python -m landmark_detection.landmarks_main -c configs/landmarks/cephalo/ssl_sim
 # ResNet-101 SimCLR v2 — 25-shot
 python -m landmark_detection.landmarks_main -c configs/landmarks/cephalo/ssl_simclrv2.json -n 25
 
-# Random init — 10-shot
-python -m landmark_detection.landmarks_main -c configs/landmarks/cephalo/random.json
+# CDPM Scratch (random init) — 10-shot
+python -m landmark_detection.landmarks_main -c configs/landmarks/cephalo/cdpm_scratch.json
 
-# Random init — 25-shot
-python -m landmark_detection.landmarks_main -c configs/landmarks/cephalo/random.json -n 25
+# CDPM Scratch (random init) — 25-shot
+python -m landmark_detection.landmarks_main -c configs/landmarks/cephalo/cdpm_scratch.json -n 25
 ```
 
 ### DHA (hand)
@@ -231,12 +218,6 @@ python -m landmark_detection.landmarks_main -c configs/landmarks/hand/cdpm_nih.j
 
 # CDPM (NIH, λ=0) — 25-shot
 python -m landmark_detection.landmarks_main -c configs/landmarks/hand/cdpm_nih.json -n 25
-
-# CDPM (combined, λ=0) — 10-shot
-python -m landmark_detection.landmarks_main -c configs/landmarks/hand/cdpm.json
-
-# CDPM (combined, λ=0) — 25-shot
-python -m landmark_detection.landmarks_main -c configs/landmarks/hand/cdpm.json -n 25
 
 # Di Via et al. (DDPM) — 10-shot
 python -m landmark_detection.landmarks_main -c configs/landmarks/hand/ddpm_divia.json
@@ -268,11 +249,11 @@ python -m landmark_detection.landmarks_main -c configs/landmarks/hand/ssl_simclr
 # ResNet-101 SimCLR v2 — 25-shot
 python -m landmark_detection.landmarks_main -c configs/landmarks/hand/ssl_simclrv2.json -n 25
 
-# Random init — 10-shot
-python -m landmark_detection.landmarks_main -c configs/landmarks/hand/random.json
+# CDPM Scratch (random init) — 10-shot
+python -m landmark_detection.landmarks_main -c configs/landmarks/hand/cdpm_scratch.json
 
-# Random init — 25-shot
-python -m landmark_detection.landmarks_main -c configs/landmarks/hand/random.json -n 25
+# CDPM Scratch (random init) — 25-shot
+python -m landmark_detection.landmarks_main -c configs/landmarks/hand/cdpm_scratch.json -n 25
 ```
 
 ---
@@ -285,7 +266,7 @@ Best experiment checkpoints are symlinked under `checkpoints/pretraining/`:
 checkpoints/pretraining/
   cdpm/combined_50k.pt          — CDPM base, 50k iterations, combined dataset (chest+hand+cephalo)
   cdpm/nih_50k.pt               — CDPM base, 50k iterations, NIH ChestX-ray14
-  cdpm_align/lambda5.pt         — CDPM-Align, λ=5, best ablation (converted, Config-free)
+  cdpm_align/lambda5.pt         — CDPM-Align, λ=5, the checkpoint used in the paper (converted, Config-free)
   ssl/dino/encoder_only.pth     — DINO ResNet-101 encoder
   ssl/mocov3/encoder_only.pth   — MoCo v3 ResNet-101 encoder
   ssl/simclrv2/encoder_only.pth — SimCLR v2 ResNet-101 encoder
@@ -321,12 +302,20 @@ configs/
     ssl_simclrv2.json        — SimCLR v2 SSL
     ddpm_config.json         — DDPM DiVia (dataset overridden per run)
   landmarks/
-    chest/     cdpm_align.json  cdpm.json  cdpm_nih.json  ssl_dino.json
-               ssl_mocov3.json  ssl_simclrv2.json  imagenet.json
-               ddpm_divia.json  random.json
-    hand/      (same 9 files)
-    cephalo/   (same 9 files)
+    chest/     cdpm_align.json  cdpm_nih.json  cdpm_scratch.json  ddpm_divia.json
+               imagenet.json  ssl_dino.json  ssl_mocov3.json  ssl_simclrv2.json
+    hand/      (same 8 files)
+    cephalo/   (same 8 files)
 ```
+
+### Notes on the paper text
+
+The configs reproduce the runs behind the published tables. Two settings differ from how the paper words them:
+
+- CDPM-Align starts from the 50k-iteration CDPM base (`combined_50k.pt`), followed by 5k alignment iterations at batch size 4. The paper describes this as "50k iterations (45k standard diffusion, 5k alignment fine-tuning)".
+- Downstream training allows up to 300 epochs, with early stopping (patience 15). The paper says 200 epochs.
+
+The λ ablation (paper Table 4) is not packaged as configs; rerun Phase 2 with a different `--lambda_align` to reproduce it.
 
 ---
 

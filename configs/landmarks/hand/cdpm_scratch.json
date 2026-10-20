@@ -5,16 +5,7 @@
         "output_dir": "/nethome/home/user/Experiments/miccai26/downstream_tasks/landmarks"
     },
     "model": {
-        "architecture": "smp_unet",
-        "encoder": "resnet101",
-        "encoder_weights": "random",
-        "decoder_channels": [
-            256,
-            128,
-            64,
-            32,
-            16
-        ],
+        "architecture": "cdpm",
         "pretrained_path": null
     },
     "training": {
@@ -25,13 +16,13 @@
         "weight_decay": 0.0001,
         "scheduler": null,
         "loss_function": "nll",
-        "epochs": 200,
+        "epochs": 300,
         "early_stopping_patience": 15,
         "use_tta": false
     },
     "task_type": "landmarks",
     "dataset": {
-        "name": "cephalo",
+        "name": "hand",
         "path": "/nethome/home/user/Datasets/Landmarks_datasets/",
         "image_size": [
             256,
@@ -42,8 +33,8 @@
         "training_samples": 10
     },
     "dataloader": {
-        "batch_size": 8,
-        "grad_accumulation": 1,
+        "batch_size": 4,
+        "grad_accumulation": 2,
         "num_workers": 4,
         "pin_memory": true
     },

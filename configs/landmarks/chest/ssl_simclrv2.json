@@ -25,7 +25,7 @@
         "weight_decay": 0.0001,
         "scheduler": null,
         "loss_function": "nll",
-        "epochs": 200,
+        "epochs": 300,
         "early_stopping_patience": 15,
         "use_tta": false
     },
@@ -42,8 +42,8 @@
         "training_samples": 10
     },
     "dataloader": {
-        "batch_size": 8,
-        "grad_accumulation": 1,
+        "batch_size": 4,
+        "grad_accumulation": 2,
         "num_workers": 4,
         "pin_memory": true
     },
