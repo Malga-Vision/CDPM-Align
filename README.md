@@ -1,6 +1,16 @@
-# miccai26-code
+# CDPM-Align: Multi-Scale Guidance-Aligned Diffusion Pretraining for Robust Few-Shot Anatomical Landmark Detection
 
-Codebase for the MICCAI 2026 paper **"CDPM-Align: Multi-Scale Guidance-Aligned Diffusion Pretraining for Robust Few-Shot Anatomical Landmark Detection"**.
+[![Paper](https://img.shields.io/badge/Paper-MICCAI%202026-blue)](https://papers.miccai.org/miccai-2026/paper/3797_paper.pdf)
+[![Project page](https://img.shields.io/badge/Project-Page-green)](https://malga-vision.github.io/CDPM-Align_AcademicPage/)
+
+**Roberto Di Via, Irina Voiculescu, Francesca Odone, Vito Paolo Pastore**
+MaLGa, DIBRIS, University of Genoa, Italy · Department of Computer Science, University of Oxford, UK
+
+Official code for the MICCAI 2026 paper **"CDPM-Align: Multi-Scale Guidance-Aligned Diffusion Pretraining for Robust Few-Shot Anatomical Landmark Detection"**.
+
+[Paper (PDF)](https://papers.miccai.org/miccai-2026/paper/3797_paper.pdf) · [Project page](https://malga-vision.github.io/CDPM-Align_AcademicPage/)
+
+See also our WACV 2027 follow-up [PACER](https://github.com/Malga-Vision/PACER-wacv27), a curriculum self-training stage that can finetune a CDPM-Align detector on an unlabeled pool.
 
 ---
 
@@ -324,4 +334,19 @@ configs/
 
 ```bash
 pip install -r requirements.txt
+```
+
+---
+
+## Citation
+
+```bibtex
+@inproceedings{divia2026cdpm,
+  title     = {{CDPM-Align}: Multi-Scale Guidance-Aligned Diffusion Pretraining for Robust Few-Shot Anatomical Landmark Detection},
+  author    = {Di Via, Roberto and Voiculescu, Irina and Odone, Francesca and Pastore, Vito Paolo},
+  booktitle = {Medical Image Computing and Computer Assisted Intervention -- MICCAI 2026},
+  series    = {Lecture Notes in Computer Science},
+  publisher = {Springer Nature Switzerland},
+  year      = {2026}
+}
 ```
