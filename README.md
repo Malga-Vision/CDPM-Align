@@ -40,7 +40,7 @@ We compare pretraining strategies for few-shot anatomical landmark detection acr
 
 ## Pretraining
 
-### Phase 1 — CDPM base (combined chest + hand + cephalo, 45k iterations)
+### Phase 1 — CDPM base (combined chest + hand + cephalo, 50k iterations, batch size 16)
 
 ```bash
 python -m pretraining.cdpm.run -c configs/pretraining/cdpm_combined.json
@@ -52,13 +52,13 @@ python -m pretraining.cdpm.run -c configs/pretraining/cdpm_combined.json
 python -m pretraining.cdpm.run -c configs/pretraining/cdpm_nih.json
 ```
 
-### Phase 2 — CDPM-Align fine-tuning (5k iterations, λ=5)
+### Phase 2 — CDPM-Align fine-tuning (5k iterations, λ=5, batch size 4, lr 1e-5)
 
 ```bash
 python -m pretraining.cdpm_align.run_finetune \
     -c configs/pretraining/cdpm_align.json \
     --lambda_align 5.0 \
-    --pretrained_checkpoint checkpoints/pretraining/cdpm/combined_45k.pt
+    --pretrained_checkpoint checkpoints/pretraining/cdpm/combined_50k.pt
 ```
 
 ### SSL — DINO
@@ -283,7 +283,7 @@ Best experiment checkpoints are symlinked under `checkpoints/pretraining/`:
 
 ```
 checkpoints/pretraining/
-  cdpm/combined_45k.pt          — CDPM base, 45k iterations, combined dataset (chest+hand+cephalo)
+  cdpm/combined_50k.pt          — CDPM base, 50k iterations, combined dataset (chest+hand+cephalo)
   cdpm/nih_50k.pt               — CDPM base, 50k iterations, NIH ChestX-ray14
   cdpm_align/lambda5.pt         — CDPM-Align, λ=5, best ablation (converted, Config-free)
   ssl/dino/encoder_only.pth     — DINO ResNet-101 encoder

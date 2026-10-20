@@ -6,7 +6,7 @@
     },
     "model": {
         "architecture": "cdpm",
-        "pretrained_path": "checkpoints/pretraining/cdpm/combined_45k.pt"
+        "pretrained_path": "checkpoints/pretraining/cdpm/combined_50k.pt"
     },
     "training": {
         "apply": true,
