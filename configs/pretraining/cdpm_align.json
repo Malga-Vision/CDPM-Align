@@ -1,6 +1,6 @@
 {
     "mode": "train",
-    "pretrained_checkpoint": "checkpoints/pretraining/cdpm/combined_50k.pt",
+    "pretrained_checkpoint": "checkpoints/pretraining/cdpm/combined_45k.pt",
 
     "data_dir": "/nethome/home/user/Datasets/Landmarks_datasets",
     "img_size": 256,

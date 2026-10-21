@@ -21,7 +21,7 @@
     "beta_T": 0.028,
 
     "batch_size": 16,
-    "iterations": 50000,
+    "iterations": 45000,
     "iters_to_accumulate": 1,
     "lr": 5e-5,
     "multiplier": 2.0,

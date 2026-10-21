@@ -39,7 +39,7 @@ We compare pretraining strategies for few-shot anatomical landmark detection acr
 
 ## Pretraining
 
-### Phase 1 — CDPM base (combined chest + hand + cephalo, 50k iterations, batch size 16)
+### Phase 1 — CDPM base (combined chest + hand + cephalo, 45k iterations, batch size 16)
 
 ```bash
 python -m pretraining.cdpm.run -c configs/pretraining/cdpm_combined.json
@@ -57,7 +57,7 @@ python -m pretraining.cdpm.run -c configs/pretraining/cdpm_nih.json
 python -m pretraining.cdpm_align.run_finetune \
     -c configs/pretraining/cdpm_align.json \
     --lambda_align 5.0 \
-    --pretrained_checkpoint checkpoints/pretraining/cdpm/combined_50k.pt
+    --pretrained_checkpoint checkpoints/pretraining/cdpm/combined_45k.pt
 ```
 
 ### SSL — DINO
@@ -97,7 +97,7 @@ python -m pretraining.ddpm_divia.ddpm_main -c configs/pretraining/ddpm_config.js
 
 ## Landmark Detection
 
-All downstream experiments use the NLL loss, AdamW (lr=1e-4), an effective batch size of 8, up to 300 epochs, and early stopping (patience=15).
+All downstream experiments use the NLL loss, AdamW (lr=1e-4), an effective batch size of 8, up to 200 epochs, and early stopping (patience=15).
 Default: **10 training samples**. Override with `-n N` (e.g., `-n 25`).
 
 ### Shenzhen (chest)
@@ -264,7 +264,7 @@ Best experiment checkpoints are symlinked under `checkpoints/pretraining/`:
 
 ```
 checkpoints/pretraining/
-  cdpm/combined_50k.pt          — CDPM base, 50k iterations, combined dataset (chest+hand+cephalo)
+  cdpm/combined_45k.pt          — CDPM base, 45k iterations, combined dataset (chest+hand+cephalo)
   cdpm/nih_50k.pt               — CDPM base, 50k iterations, NIH ChestX-ray14
   cdpm_align/lambda5.pt         — CDPM-Align, λ=5, the checkpoint used in the paper (converted, Config-free)
   ssl/dino/encoder_only.pth     — DINO ResNet-101 encoder
@@ -308,12 +308,7 @@ configs/
     cephalo/   (same 8 files)
 ```
 
-### Notes on the paper text
-
-The configs reproduce the runs behind the published tables. Two settings differ from how the paper words them:
-
-- CDPM-Align starts from the 50k-iteration CDPM base (`combined_50k.pt`), followed by 5k alignment iterations at batch size 4. The paper describes this as "50k iterations (45k standard diffusion, 5k alignment fine-tuning)".
-- Downstream training allows up to 300 epochs, with early stopping (patience 15). The paper says 200 epochs.
+### λ ablation
 
 The λ ablation (paper Table 4) is not packaged as configs; rerun Phase 2 with a different `--lambda_align` to reproduce it.
 
