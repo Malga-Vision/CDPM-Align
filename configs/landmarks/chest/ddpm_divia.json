@@ -2,7 +2,7 @@
     "environment": {
         "gpu": 0,
         "seed": 42,
-        "output_dir": "/nethome/home/user/Experiments/miccai26/downstream_tasks/landmarks"
+        "output_dir": "outputs/downstream_tasks/landmarks"
     },
     "model": {
         "architecture": "ddpm",
@@ -23,7 +23,7 @@
     "task_type": "landmarks",
     "dataset": {
         "name": "chest",
-        "path": "/nethome/home/user/Datasets/Landmarks_datasets/",
+        "path": "data/",
         "image_size": [
             256,
             256

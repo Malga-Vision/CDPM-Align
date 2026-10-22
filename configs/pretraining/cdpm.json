@@ -3,7 +3,7 @@
 
     "dataset_type": "combined",
     "conditioned": true,
-    "data_dir": "/nethome/home/user/Datasets/Landmarks_datasets",
+    "data_dir": "data/",
     "img_size": 256,
     "img_channels": 1,
     "max_samples": null,
@@ -36,10 +36,10 @@
 
     "device": "cuda:0",
 
-    "save_dir": "/nethome/home/user/Experiments/miccai26/pretraining/cdpm_landmarks/",
+    "save_dir": "outputs/pretraining/cdpm_landmarks/",
     "freq_save": 5000,
     "load_weights": null,
-    "sampled_dir": "/nethome/home/user/Experiments/miccai26/pretraining/cdpm_landmarks/samples",
+    "sampled_dir": "outputs/pretraining/cdpm_landmarks/samples",
 
     "resume": false,
     "resume_checkpoint": null,

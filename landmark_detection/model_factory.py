@@ -22,7 +22,7 @@ from pretraining.cdpm.model import UNet as CDPMUNet, ResBlock
 DEFAULT_DECODER_CHANNELS = [256, 128, 64, 32, 16]
 RANDOM_WEIGHT_ALIASES = {'None', 'none', 'random', None}
 
-# CDPM downstream adapter constants (see ablation in paper)
+# CDPM downstream adapter constants, following Baranchuk et al. (paper ref. [1], t=200)
 CDPM_DOWNSTREAM_TIMESTEP = 200   # fixed noise level used for feature extraction
 
 # Registry mapping architecture names to SMP classes
@@ -65,11 +65,10 @@ def _validate_config(config: Dict, required_keys: List[str], context: str = "") 
 def _load_weights(model: nn.Module, path: str, device: torch.device, component: str = 'encoder') -> bool:
     """Safely loads weights into a model or specific component.
 
-    Handles two legacy checkpoint formats automatically:
-    - CDPM-align checkpoints that pickle a ``Config`` dataclass: retried with
-      the dataclass injected so unpickling succeeds.
-    - SSL checkpoints whose keys carry a ``backbone.`` prefix: the prefix is
-      stripped before loading so SMP encoder weights load directly.
+    SSL checkpoints are accepted either as ``encoder.pth`` (keys prefixed with
+    ``encoder.``, from ``SMPBackboneWrapper``) or as a full model state (keys
+    prefixed with ``backbone.``); both prefixes are stripped before loading.
+    Raises if no checkpoint key matches the target, warns if some are missing.
     """
     if not path:
         return False
@@ -91,18 +90,26 @@ def _load_weights(model: nn.Module, path: str, device: torch.device, component: 
             # If component is None or doesn't exist, load into the root model
             target = model
 
-        # Load state dict - some models (e.g., SMP encoders) return None instead of the tuple
-        result = target.load_state_dict(state_dict, strict=False)
-        
-        # Handle result if available (may be None for some model types like SMP)
-        if result is not None:
-            missing, unexpected = result
-            if missing:
-                print(f"Missing keys when loading: {missing[:5]}..." if len(missing) > 5 else missing)
-            if unexpected:
-                print(f"Unexpected keys when loading: {unexpected[:5]}..." if len(unexpected) > 5 else unexpected)
+        # SSL encoder.pth stores SMPBackboneWrapper state, i.e. keys prefixed with "encoder."
+        if component == 'encoder':
+            state_dict = {k[len('encoder.'):] if k.startswith('encoder.') else k: v
+                          for k, v in state_dict.items()}
 
-        
+        # strict=False hides mismatches (and SMP encoders return None), so check keys explicitly
+        expected = set(target.state_dict().keys())
+        matched = expected & set(state_dict.keys())
+        if not matched:
+            raise RuntimeError(f"No key of {path} matches the {component or 'model'} state dict "
+                               f"(checkpoint keys e.g. {list(state_dict)[:3]}, expected e.g. {sorted(expected)[:3]})")
+        missing = sorted(expected - matched)
+        unexpected = sorted(set(state_dict) - expected)
+        target.load_state_dict(state_dict, strict=False)
+        if missing:
+            print(f"WARNING: {len(missing)}/{len(expected)} {component or 'model'} keys missing from {path} "
+                  f"(left at initialisation): {missing[:5]}")
+        if unexpected:
+            print(f"WARNING: {len(unexpected)} unexpected keys in {path} ignored: {unexpected[:5]}")
+
         print(f"Loaded pretrained {component if component else 'weights'} from: {path}")
         del checkpoint
         return True

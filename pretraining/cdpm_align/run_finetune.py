@@ -48,7 +48,7 @@ def main():
     config = parse_args()
 
     print("=" * 60)
-    print("CDPM Finetuning with DINO-style Alignment")
+    print("CDPM-Align Finetuning with Multi-scale Guidance Alignment")
     print("=" * 60)
     for key, value in config.items():
         print(f"  {key}: {value}")

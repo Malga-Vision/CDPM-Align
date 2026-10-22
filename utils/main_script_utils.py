@@ -48,7 +48,7 @@ def initialize_experiment(
 
     output_dir = create_experiment_output_path(config)
     if output_dir_suffix:
-        output_dir = os.path.join(output_dir, output_dir_suffix)
+        output_dir = os.path.join(output_dir, output_dir_suffix, f"seed{config['environment']['seed']}")
     
     os.makedirs(output_dir, exist_ok=True)
     config['environment']['output_dir'] = output_dir

@@ -2,6 +2,7 @@
 Streamlined utility functions for dataset and dataloader creation with unified dataset structure.
 """
 
+import os
 import json
 
 from torch.utils.data import DataLoader
@@ -104,7 +105,8 @@ def create_datasets(config, use_train_val=False):
             datasets[train_phase].image_files = datasets[train_phase].image_files[:num_samples]
             print(f"Limited {train_phase} dataset to {num_samples} samples")
 
-        indexed_files_path = f"{datasets[train_phase].phase}_image_files.json"
+        indexed_files_path = os.path.join(config.get('environment', {}).get('output_dir', '.'),
+                                          f"{datasets[train_phase].phase}_image_files.json")
         with open(indexed_files_path, 'w') as f:
             json.dump(datasets[train_phase].image_files, f)
         print(f"Saved indexed image files for {train_phase} to {indexed_files_path}")

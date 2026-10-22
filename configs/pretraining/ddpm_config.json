@@ -2,7 +2,7 @@
     "environment": {
         "gpu": 0,
         "seed": 42,
-        "output_dir": "/nethome/home/user/Experiments/miccai26/pretraining/ddpm"
+        "output_dir": "outputs/pretraining/ddpm"
     },
     "model": {
         "use_ema": true,
@@ -44,7 +44,7 @@
     "task_type": "pretraining",
     "dataset": {
         "name": "chest",
-        "path": "/nethome/home/user/Datasets/Landmarks_datasets",
+        "path": "data/",
         "image_size": [256, 256],
         "image_channels": 1
     },

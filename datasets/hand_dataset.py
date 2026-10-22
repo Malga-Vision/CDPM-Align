@@ -222,7 +222,7 @@ if __name__ == "__main__":
     # Test pretraining
     print("\n=== Testing Pretraining ===")
     dataset_pretrain = HandDataset(
-        root_dir="/nethome/home/user/Datasets/Landmarks_datasets",
+        root_dir="data/",
         phase='train',
         task_type='pretraining'
     )
@@ -231,7 +231,7 @@ if __name__ == "__main__":
     # Test landmarks
     print("\n=== Testing Landmarks ===")
     dataset_landmarks = HandDataset(
-        root_dir="/nethome/home/user/Datasets/Landmarks_datasets",
+        root_dir="data/",
         phase='train',
         task_type='landmarks',
         sigma=2.0,

@@ -1,0 +1,46 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "CDPM-Align: Multi-Scale Guidance-Aligned Diffusion Pretraining for Robust Few-Shot Anatomical Landmark Detection"
+type: software
+repository-code: "https://github.com/Malga-Vision/CDPM-Align"
+license: MIT
+authors:
+  - family-names: Di Via
+    given-names: Roberto
+    orcid: "https://orcid.org/0009-0005-8907-8385"
+  - family-names: Voiculescu
+    given-names: Irina
+    orcid: "https://orcid.org/0000-0002-9104-8012"
+  - family-names: Odone
+    given-names: Francesca
+    orcid: "https://orcid.org/0000-0002-3463-2263"
+  - family-names: Pastore
+    given-names: Vito Paolo
+    orcid: "https://orcid.org/0000-0002-5827-5571"
+preferred-citation:
+  type: conference-paper
+  title: "CDPM-Align: Multi-Scale Guidance-Aligned Diffusion Pretraining for Robust Few-Shot Anatomical Landmark Detection"
+  authors:
+    - family-names: Di Via
+      given-names: Roberto
+    - family-names: Voiculescu
+      given-names: Irina
+    - family-names: Odone
+      given-names: Francesca
+    - family-names: Pastore
+      given-names: Vito Paolo
+  collection-title: "Medical Image Computing and Computer Assisted Intervention -- MICCAI 2026"
+  collection-type: proceedings
+  series: "Lecture Notes in Computer Science"
+  volume: 16881
+  start: 89
+  end: 99
+  publisher:
+    name: "Springer Nature Switzerland"
+  year: 2026
+  doi: "10.1007/978-3-032-38072-2_9"
+  url: "https://doi.org/10.1007/978-3-032-38072-2_9"
+  identifiers:
+    - type: other
+      value: "arXiv:2606.04898"
+      description: arXiv preprint

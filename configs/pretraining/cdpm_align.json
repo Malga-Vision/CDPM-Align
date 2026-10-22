@@ -2,7 +2,7 @@
     "mode": "train",
     "pretrained_checkpoint": "checkpoints/pretraining/cdpm/combined_45k.pt",
 
-    "data_dir": "/nethome/home/user/Datasets/Landmarks_datasets",
+    "data_dir": "data/",
     "img_size": 256,
     "img_channels": 1,
     "num_classes": 3,
@@ -27,7 +27,7 @@
     "lambda_diff": 1.0,
     "lambda_align": 5.0,
 
-    "batch_size": 4,
+    "batch_size": 16,
     "iterations": 5000,
     "lr": 1e-5,
     "weight_decay": 1e-4,
@@ -39,7 +39,7 @@
     "images_to_sample": 16,
 
     "device": "cuda:0",
-    "save_dir": "/nethome/home/user/Experiments/miccai26/pretraining/cdpm_align",
+    "save_dir": "outputs/pretraining/cdpm_align",
     "freq_save": 5000,
 
     "resume": false

@@ -132,6 +132,6 @@ if __name__ == '__main__':
 
 # Usage examples:
 # Training:
-#   python -m pretraining.DiffusionFreeGuidance.runCDPM --mode train --iterations 100000 --batch_size 32 --img_size 256 
+#   python -m pretraining.cdpm.run -c configs/pretraining/cdpm_combined.json
 # Evaluation:
-#   python -m pretraining.DiffusionFreeGuidance.runCDPM --mode eval --load_weights ./checkpoints/combined/ckpt_100000_iterations.pt --images_to_sample 64
+#   python -m pretraining.cdpm.run -c configs/pretraining/cdpm_combined.json --mode eval --load_weights <save_dir>/combined/ckpt_45000_iterations.pt --images_to_sample 64

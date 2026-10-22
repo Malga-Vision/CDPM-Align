@@ -1,5 +1,5 @@
 """
-CDPM Finetuning Training Loop with DINO-style Alignment.
+CDPM-Align Finetuning Training Loop with Multi-scale Guidance Alignment.
 
 Takes a pretrained CDPM model and finetunes it with the combined
 diffusion + alignment loss to improve learned representations.

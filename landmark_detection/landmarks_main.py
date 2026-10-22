@@ -54,8 +54,9 @@ def main():
     add_downstream_args(parser)
     args = parser.parse_args()
     
-    # Initialize
-    config, device, output_dir = initialize_experiment(args, task_type='landmarks')
+    # Initialize (one output dir per config file + seed, so runs never reuse each other's best_checkpoint.pt)
+    experiment_name = os.path.splitext(os.path.basename(args.config))[0]
+    config, device, output_dir = initialize_experiment(args, task_type='landmarks', output_dir_suffix=experiment_name)
     
     # Load data
     loaders = setup_data_from_config(config)
